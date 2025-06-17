@@ -9,11 +9,21 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
+    init(tabBarControllers: [UIViewController]) {
+        super.init(nibName: nil, bundle: nil)
+        for tab in tabBarControllers {
+            self.addChild(tab)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAppearance()
-        configureControllers()
     }
     
     private func configureAppearance() {
@@ -28,27 +38,10 @@ final class TabBarController: UITabBarController {
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
         
-        tabBar.tintColor = AppColors.background
+        tabBar.tintColor = AppColors.orange
         tabBar.barTintColor = AppColors.background
         tabBar.isTranslucent = false
         tabBar.backgroundColor = AppColors.background
     }
-    
-    private func configureControllers() {
-        let homeListController = HomeViewController()
-        homeListController.tabBarItem = UITabBarItem(
-            title: nil,
-            image: .init(resource: .home),
-            selectedImage: .init(resource: .homeActivate)
-        )
         
-        let profileController = ProfileViewController()
-        profileController.tabBarItem = UITabBarItem(
-            title: nil,
-            image: .init(resource: .profile),
-            selectedImage: .init(resource: .profileActivate)
-        )
-        
-        viewControllers = [homeListController, profileController]
-    }
 }
