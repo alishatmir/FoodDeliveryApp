@@ -6,6 +6,6 @@
 //
 import UIKit
 
-final class MyListViewController: UIViewController {
+final class ListViewController: UIViewController {
     
 }
