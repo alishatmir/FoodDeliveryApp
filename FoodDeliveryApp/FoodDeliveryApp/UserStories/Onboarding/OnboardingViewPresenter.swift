@@ -8,10 +8,12 @@
 import Foundation
 
 protocol OnboardingViewOutput: AnyObject {
+    
     func onboardingFinish()
 }
 
 class OnboardingViewPresenter: OnboardingViewOutput {
+    
     weak var coordinator: OnboardingCoordinator!
     
     init(coordinator: OnboardingCoordinator!) {
