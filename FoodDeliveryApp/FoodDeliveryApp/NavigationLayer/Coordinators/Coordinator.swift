@@ -43,10 +43,10 @@ protocol TabBarCoordinator: AnyObject, CoordinatorProtocol {
 }
 
 class Coordinator: CoordinatorProtocol {
-    var childCoordinators: [any CoordinatorProtocol]
+    var childCoordinators: [CoordinatorProtocol]
     var type: CoordinatorType
     var navigationController: UINavigationController?
-    var finishDelegate: (any CoordinatorFinishDelegate)?
+    var finishDelegate: CoordinatorFinishDelegate?
     
     init(
         childCoordinators: [CoordinatorProtocol] = [CoordinatorProtocol](),
@@ -61,8 +61,8 @@ class Coordinator: CoordinatorProtocol {
     }
     
     deinit {
-        print("Coordinator deinit \(type)")
-        childCoordinators.forEach{ $0.finishDelegate = nil }
+        print("Coordinator deinited \(type)")
+        childCoordinators.forEach { $0.finishDelegate = nil }
         childCoordinators.removeAll()
     }
     

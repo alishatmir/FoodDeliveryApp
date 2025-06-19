@@ -9,6 +9,8 @@ import UIKit
 
 class OnboardingPartViewController: UIViewController {
     
+    
+// MARK: - Properties
     var imageToShow: UIImage? {
         didSet {
             imageView.image = imageToShow
@@ -17,7 +19,7 @@ class OnboardingPartViewController: UIViewController {
     
     var titleText: String? {
         didSet {
-            titleLabel.text = title
+            titleLabel.text = titleText
         }
     }
     
@@ -26,22 +28,26 @@ class OnboardingPartViewController: UIViewController {
             descriptionLabel.text = descriptionText
         }
     }
-    
+
     var buttonText: String?
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    
+
+// MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLayout()
     }
 }
+
+// MARK: - Layout
 private extension OnboardingPartViewController {
     
     func setupLayout() {
+        
         setupView()
         setupImageView()
         setupTitleLabel()
@@ -49,10 +55,12 @@ private extension OnboardingPartViewController {
     }
     
     func setupView() {
+        
         view.backgroundColor = AppColors.orange
     }
     
     func setupImageView () {
+        
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -66,11 +74,12 @@ private extension OnboardingPartViewController {
     }
     
     func setupTitleLabel () {
+        
         view.addSubview(titleLabel)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel.font = .Roboto.bold.size(of: 24)
-        titleLabel.textColor = AppColors.background
+        titleLabel.textColor = AppColors.backgroundWhite
         titleLabel.textAlignment = .center
         
         NSLayoutConstraint.activate([
@@ -80,11 +89,12 @@ private extension OnboardingPartViewController {
     }
     
     func setupDescriptionLabel () {
+        
         view.addSubview(descriptionLabel)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionLabel.font = .Roboto.regular.size(of: 14)
-        descriptionLabel.textColor = AppColors.background
+        descriptionLabel.textColor = AppColors.backgroundWhite
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
         
