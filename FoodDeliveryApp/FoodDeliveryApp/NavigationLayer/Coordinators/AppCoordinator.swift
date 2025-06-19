@@ -14,7 +14,7 @@ class AppCoordinator: Coordinator {
     
     override func start() {
         if userStorage.passedOnboarding {
-            showMainFlow()
+            showAuthFlow()
         } else {
             showOnboardingFlow()
         }
@@ -25,9 +25,32 @@ class AppCoordinator: Coordinator {
     }
 }
 
+// MARK: - Methods
+
+extension AppCoordinator {
+    
+    func showSingInScene() {
+        guard let navigationController = navigationController else { return }
+        let vc = factory.makeSingInScene(coordinator: self)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showSingUpScene() {
+        guard let navigationController = navigationController else { return }
+        let vc = factory.makeSingUpScene(coordinator: self)
+        navigationController.pushViewController(vc, animated: true)
+    }
+}
+
 // MARK: - Navigation methods
 
 private extension AppCoordinator {
+    func showAuthFlow() {
+        guard let navigationController = navigationController else { return }
+        let vc = factory.makeAuthScene(coordinator: self)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func showOnboardingFlow() {
         guard let navigationController = navigationController else { return }
         factory.makeOnboardingFlow(coordinator: self, finishDelegate: self, navigationController: navigationController)
@@ -47,7 +70,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         switch childCoordinator.type {
         case .onboarding:
             navigationController?.viewControllers.removeAll()
-            showMainFlow()
+            showAuthFlow()
         case .app:
             return
         default:

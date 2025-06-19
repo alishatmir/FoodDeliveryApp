@@ -19,7 +19,7 @@ class OnboardingPartViewController: UIViewController {
     
     var titleText: String? {
         didSet {
-            titleLabel.text = title
+            titleLabel.text = titleText
         }
     }
     
@@ -79,7 +79,7 @@ private extension OnboardingPartViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel.font = .Roboto.bold.size(of: 24)
-        titleLabel.textColor = AppColors.background
+        titleLabel.textColor = AppColors.backgroundWhite
         titleLabel.textAlignment = .center
         
         NSLayoutConstraint.activate([
@@ -94,7 +94,7 @@ private extension OnboardingPartViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionLabel.font = .Roboto.regular.size(of: 14)
-        descriptionLabel.textColor = AppColors.background
+        descriptionLabel.textColor = AppColors.backgroundWhite
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
         

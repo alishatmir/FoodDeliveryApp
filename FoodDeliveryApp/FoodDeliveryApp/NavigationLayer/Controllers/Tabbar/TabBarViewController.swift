@@ -30,7 +30,7 @@ final class TabBarController: UITabBarController {
         let tabBarAppearance = UITabBarAppearance()
         
         tabBarAppearance.backgroundImage = .init()
-        tabBarAppearance.backgroundColor = AppColors.background
+        tabBarAppearance.backgroundColor = AppColors.backgroundWhite
         
         UITabBar.appearance().standardAppearance = tabBarAppearance
         
@@ -39,9 +39,9 @@ final class TabBarController: UITabBarController {
         }
         
         tabBar.tintColor = AppColors.orange
-        tabBar.barTintColor = AppColors.background
+        tabBar.barTintColor = AppColors.backgroundWhite
         tabBar.isTranslucent = false
-        tabBar.backgroundColor = AppColors.background
+        tabBar.backgroundColor = AppColors.backgroundWhite
     }
         
 }
