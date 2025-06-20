@@ -27,21 +27,27 @@ final class TabBarController: UITabBarController {
     }
     
     private func configureAppearance() {
-        let tabBarAppearance = UITabBarAppearance()
+//        let tabBarAppearance = UITabBarAppearance()
         
-        tabBarAppearance.backgroundImage = .init()
-        tabBarAppearance.backgroundColor = AppColors.backgroundWhite
-        
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        
-        if #available(iOS 15, *) {
-            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        }
+//        tabBarAppearance.backgroundImage = .init()
+//        tabBarAppearance.backgroundColor = AppColors.backgroundWhite
+//        
+//        UITabBar.appearance().standardAppearance = tabBarAppearance
+//        
+//        if #available(iOS 15, *) {
+//            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+//        }
         
         tabBar.tintColor = AppColors.orange
         tabBar.barTintColor = AppColors.backgroundWhite
         tabBar.isTranslucent = false
         tabBar.backgroundColor = AppColors.backgroundWhite
+        tabBar.itemPositioning = .centered
+        tabBar.itemWidth = 40.0
+        tabBar.itemSpacing = 40
+        
+        UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -3)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.Roboto.regular.size(of: 12)], for: .normal)
     }
         
 }
