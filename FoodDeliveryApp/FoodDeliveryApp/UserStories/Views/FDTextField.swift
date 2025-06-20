@@ -21,6 +21,7 @@ class FDTextField: UITextField {
         self.layer.cornerRadius = 24
         self.backgroundColor = AppColors.backgroundGrey
         self.font = .Roboto.regular.size(of: 14)
+        self.autocapitalizationType = .none
         
         self.placeholder = "Text to input"
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: self.frame.height))

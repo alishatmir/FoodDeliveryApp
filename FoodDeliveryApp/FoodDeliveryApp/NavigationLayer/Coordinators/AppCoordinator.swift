@@ -27,33 +27,15 @@ class AppCoordinator: Coordinator {
 
 // MARK: - Methods
 
-extension AppCoordinator {
-    
-    func showSingInScene() {
-        guard let navigationController = navigationController else { return }
-        let vc = factory.makeSingInScene(coordinator: self)
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func showSingUpScene() {
-        guard let navigationController = navigationController else { return }
-        let vc = factory.makeSingUpScene(coordinator: self)
-        navigationController.pushViewController(vc, animated: true)
-    }
-}
 
 // MARK: - Navigation methods
 
 private extension AppCoordinator {
-    func showAuthFlow() {
-        guard let navigationController = navigationController else { return }
-        let vc = factory.makeAuthScene(coordinator: self)
-        navigationController.pushViewController(vc, animated: true)
-    }
     
     func showOnboardingFlow() {
         guard let navigationController = navigationController else { return }
-        factory.makeOnboardingFlow(coordinator: self, finishDelegate: self, navigationController: navigationController)
+        let onboardingCoordinator = factory.makeOnboardingFlow(coordinator: self, finishDelegate: self, navigationController: navigationController)
+        onboardingCoordinator.start()
     }
     
     func showMainFlow() {
@@ -61,7 +43,15 @@ private extension AppCoordinator {
         let tabBarController = factory.makeMainFlow(coordinator: self, finishDelegate: self)
         navigationController.pushViewController(tabBarController, animated: true)
     }
+
+    func showAuthFlow() {
+        guard let navigationController = navigationController else { return }
+        let loginCoordinator = factory.makeLoginFlow(coordinator: self, finishDelegate: self, navigationController: navigationController)
+        loginCoordinator.start()
+    }
 }
+
+// MARK: - FinishDelegate
 
 extension AppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinished(childCoordinator: CoordinatorProtocol) {
@@ -69,8 +59,11 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         
         switch childCoordinator.type {
         case .onboarding:
-            navigationController?.viewControllers.removeAll()
             showAuthFlow()
+            navigationController?.viewControllers = [navigationController?.viewControllers.last ?? UIViewController()]
+        case .login:
+            showMainFlow()
+            navigationController?.viewControllers = [navigationController?.viewControllers.last ?? UIViewController()]
         case .app:
             return
         default:
